@@ -40,19 +40,18 @@ main {
     height: 650px;
 }
 
-.card-img-top{
-  height: 100px !important;
-}
 
 /* .card2{
     border: 2px solid rgba(0, 0, 255, 0.138);
     height: 350px;
 } */
 
-
+.card-img-top{
+  height: 400px;
+}
 
 .contenedor-img{
-    height: 400px;
+    /* height: 400px !important; */
     overflow: hidden;
 }
 
@@ -70,7 +69,7 @@ main {
 
 .contenedor-img img{
     width: 100%;
-    height: 400px;
+    /* height: 400px; */
     transition: all .5s;
 }
 

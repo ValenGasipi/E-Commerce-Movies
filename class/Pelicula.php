@@ -1,13 +1,15 @@
 <?php
 
 require_once('Conexion.php');
+require_once('Categoria.php');
+require_once('Director.php');
 
 class Pelicula{
     protected $id;
     protected $img;
     protected $nombre;
-    protected $director;
-    protected $categoria;
+    protected $director_id;
+    protected $categoria_id;
     protected $sinopsis;
     protected $precio;
     protected $trailer;
@@ -61,8 +63,13 @@ class Pelicula{
         return $categoriaConMayuscula;
     }
 
+    public function directorMayuscula($director){
+        $directorConMayuscula = ucfirst($director);
+        return $directorConMayuscula;
+    }
+
     public function nombreMayuscula($nombre){
-        $nombreConMayuscula = ucfirst($nombre);
+        $nombreConMayuscula = ucwords($nombre);
         return $nombreConMayuscula;
     }
 
@@ -98,14 +105,16 @@ class Pelicula{
         return $this->nombre;
     }
 
-    public function getDirector()
+    public function getDirector_id()
     {
-        return $this->director;
+        $director = (new Director())->catalogodirector($this->director_id);
+        return $director->getNombre();
     }
  
-    public function getCategoria()
+    public function getCategoria_id()
     {
-        return $this->categoria;
+        $categoria = (new Categoria())->catalogoCategoria($this->categoria_id);
+        return $categoria->getNombre();
     }
  
     public function getSinopsis()
