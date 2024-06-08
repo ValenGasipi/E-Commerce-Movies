@@ -18,7 +18,7 @@
                         <!-- Dropdawn Filtros ================ -->
                         <div class="btn-group">
                           <!-- <button type="button" class="btn btn-danger">Productos</button> -->
-                          <a class="nav-link text-light btn btn-secondary" href="index.php?sec=productos"><?php if (isset($_GET["sec"]) && $_GET["sec"]    == "productos" || isset($_GET["marca"]) || isset($_GET["estilo"]) || isset($_GET["id"])) {
+                          <a class="nav-link text-light btn btn-secondary" href="index.php?sec=productos"><?php if (isset($_GET["sec"]) && $_GET["sec"] == "productos" || isset($_GET["categoria"]) || isset($_GET["id"])) {
                                 echo "<b>Productos</b>";
                             } else {
                                 echo "Productos";
@@ -29,7 +29,7 @@
                           <ul class="dropdown-menu">
                             <!-- <li><a class="dropdown-item" href="#">Todos</a></li> -->
                             <li>
-                            <a href="index.php?sec=productos" class="dropdown-item text-decoration-none "><?= isset($_GET["sec"]) && $_GET["sec"] == "productos" ? "<b>TODOS</b>" : "TODOS" ?></a>
+                            <a href="index.php?sec=productos" class="dropdown-item text-decoration-none "><?= isset($_GET["sec"]) && $_GET["sec"] == "productos" ? "<b>Todos</b>" : "Todos" ?></a>
                             </li>
                             <!-- <li><a class="dropdown-item" href="#">Terror</a></li> -->
                             <li>

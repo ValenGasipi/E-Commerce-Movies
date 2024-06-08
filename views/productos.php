@@ -19,7 +19,7 @@
 
 <?php
 foreach ($productos as $producto) {
-    // foreach ($productos as $producto) { //Recorre los productos de cada marca
+    // foreach ($productos as $producto) { 
     $categoriaConMayuscula = (new Pelicula())->categoriaMayuscula($producto->getCategoria_id());
     $directorConMayuscula = (new Pelicula())->directorMayuscula($producto->getDirector_id());
     $nombreConMayuscula = ( new Pelicula() )->nombreMayuscula(($producto->getNombre()));

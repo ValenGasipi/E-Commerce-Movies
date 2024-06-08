@@ -1,4 +1,5 @@
 <?php   
+
     $categoriaSeleccionada = isset($_GET["categoria"]) ? $_GET["categoria"] : null;
     // echo $categoriaSeleccionada;
     #Variable para poner bien el titulo
@@ -7,22 +8,23 @@
     //     $tituloCategoria = (new Pelicula())->getCategoria_id($categoriaSeleccionada);
     // }
 
-    echo (new Categoria())->getNombre($categoriaSeleccionada)
+    echo $categoriaSeleccionada;
+    $tituloCategoria = (new Categoria())->getNombre()
 ?>
 
 
 <h2 class="text-center text-primary-emphasis m-4"><?= ucfirst($tituloCategoria) //strtoupper($categoriaSeleccionada) convierte toda la cadena a mayuscula, sino se puede usar ucfirst que pone como mayuscula la primer letra?> </h2> 
 
 <section class="d-flex flex-wrap gap-4 justify-content-center m-5 mt-3">
-    <h2 class="text-center text-primary-emphasis m-4"><?= $categoriaConMayuscula //strtoupper($categoriaSeleccionada) convierte toda la cadena a mayuscula, sino se puede usar ucfirst que pone como mayuscula la primer letra?> </h2>   
+    <!-- <h2 class="text-center text-primary-emphasis m-4"><?= $categoriaConMayuscula //strtoupper($categoriaSeleccionada) convierte toda la cadena a mayuscula, sino se puede usar ucfirst que pone como mayuscula la primer letra?> </h2>    -->
     
     <?php
 if(isset($_GET["categoria"])){
-    
+
     $filtroCategoria = (new Pelicula())->catalogoCategoria($categoriaSeleccionada);
     
     foreach ($filtroCategoria as $producto) { 
-        // foreach ($productos as $producto) { //Recorre los productos de cada marca
+        // foreach ($productos as $producto) {
             $categoriaConMayuscula = (new Pelicula())->categoriaMayuscula($producto->getCategoria_id());
             $directorConMayuscula = (new Pelicula())->directorMayuscula($producto->getDirector_id());
             $nombreConMayuscula = ( new Pelicula() )->nombreMayuscula(($producto->getNombre()));
