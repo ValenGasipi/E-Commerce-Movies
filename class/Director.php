@@ -6,6 +6,20 @@ class Director{
     protected $biografia;
     protected $imagen;
 
+    public function catalogoCompleto(): array
+    {
+        $catalogo = [];
+        $conexion = (new Conexion())->getConexion();
+        $query = "SELECT * FROM director";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
+
+        $catalogo = $PDOStatement->fetchAll();
+
+        return $catalogo;
+    }
+
     public function catalogoDirector(int $id) :? self
     {
         $conexion = (new Conexion())->getConexion();
@@ -17,6 +31,54 @@ class Director{
     
         return $resultado ? $resultado : null;
     }
+
+    public function reemplazarImagen($imagen, $id){
+        $conexion = (new Conexion())->getConexion();
+        $query = "UPDATE director SET imagen = :imagen WHERE id = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([
+            "imagen" => htmlspecialchars($imagen),
+            "id" => htmlspecialchars($id)
+        ]);
+    }
+
+    public function edit($nombre, $biografia, $id){
+        $conexion = (new Conexion())->getConexion();
+        $query = "UPDATE director SET nombre= :nombre, biografia= :biografia WHERE id = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([
+            "nombre" => htmlspecialchars($nombre),
+            "biografia" => htmlspecialchars($biografia),
+            "id" => htmlspecialchars($id)
+        ]);
+    }
+
+    public function delete(){
+        $conexion = (new Conexion())->getConexion();
+        $query = "DELETE FROM director WHERE id = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(["id" => htmlspecialchars($this->id)]);
+    }
+
+    public function add($nombre, $biografia, $imagen): void
+    {
+        try {
+            $conexion = (new Conexion())->getConexion();
+            $query = "INSERT INTO director VALUES (null, :nombre, :biografia, :imagen )";
+            $PDOStatement = $conexion->prepare($query);
+            $PDOStatement->execute([
+                "nombre" => htmlspecialchars($nombre),
+                "biografia" => htmlspecialchars($biografia),
+                "imagen" => htmlspecialchars($imagen)
+            ]);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+
+    // Getters y setters
      
     public function getId()
     {

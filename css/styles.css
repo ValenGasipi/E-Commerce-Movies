@@ -287,3 +287,26 @@ h5{
   .envios{
     height: 70vh !important;
   }
+
+  .container-directores{
+    /* width: 90% ; */
+    max-width: 1500px;
+  }
+/* 
+  .container-img-director{
+    max-width: 110px;
+  } */
+
+  .container-img-director img{
+    min-width: 50px;
+    max-width: 100px; 
+  }
+
+  .container-edit-directores{
+    width: 90%;
+    margin: auto;
+  }
+
+  .container-edit-directores img{
+    max-width: 150px;
+  }

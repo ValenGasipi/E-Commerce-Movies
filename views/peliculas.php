@@ -11,7 +11,7 @@
 
 <div class="card-group gap-3">
   <div class="card" style="max-width: 15rem;">
-  <img src="<?= $producto->getImagen() ?>" class="card-img-top" alt="<?= $producto->getNombre() ?>">
+  <img src="img/<?= $producto->getImagen() ?>" class="card-img-top" alt="<?= $producto->getNombre() ?>">
     <div class="card-body">
     <p class="card-title">Director: <?= $directorConMayuscula ?></p>
     <p class="card-title">Genero: <?= $categoriaConMayuscula; ?></p>

@@ -1,5 +1,5 @@
  
-<footer class="bg-dark p-5">
+<footer class="bg-secondary p-5">
             <div class="container text-center border-bottom border-secondary pb-2">
                 <div class="row align-items-start">
                   <div class="col">

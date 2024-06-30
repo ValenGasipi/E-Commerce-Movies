@@ -73,7 +73,7 @@ class Pelicula{
         return $nombreConMayuscula;
     }
 
-    // Cualquier cosa a modificar video 19/4 minuto 36:30
+    
     public function recortarDescripcion($texto){
             $arrayTexto = explode(" ", $texto);//al devolver un array indexado, sus claves son numericas y sirve para acortar la descripcion
             $textoAcortado  = [];
@@ -85,7 +85,67 @@ class Pelicula{
                 }
             }
             return implode(" ", $textoAcortado).'...';
-        }
+    }
+
+    public function add($nombre, $categoria_id, $director_id, $trailer, $sinopsis, $portada, $precio): int
+    {
+            try {
+                $conexion = (new Conexion()) -> getConexion();
+                $query = "INSERT INTO `peliculas` (`id`, `nombre`, `categoria_id`, `director_id`, `trailer`, `sinopsis`, `img`, `precio`) VALUES (NULL, :nombre, :categoria_id, :director_id, :trailer, :sinopsis, :portada, :precio)";
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->execute([
+                    'nombre' => htmlspecialchars($nombre),
+                    'categoria_id' => htmlspecialchars($categoria_id),
+                    'director_id' => htmlspecialchars($director_id),
+                    'trailer' => htmlspecialchars($trailer),
+                    'sinopsis' => htmlspecialchars($sinopsis),
+                    'portada' => htmlspecialchars($portada),
+                    'precio' => htmlspecialchars($precio),
+                ]);
+                return $conexion->lastInsertId();
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+    }
+
+    public function delete(){
+        $conexion = (new Conexion()) -> getConexion();
+        $query = "DELETE FROM peliculas WHERE id = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([
+            "id" => htmlspecialchars($this->id)
+        ]);
+    }
+
+    public function edit($nombre, $categoria_id, $director_id, $trailer, $sinopsis, $precio, $id){
+        $conexion = (new Conexion()) -> getConexion();
+        $query = "UPDATE `peliculas` SET `nombre` = :nombre, `categoria_id` = :categoria_id, `director_id` = :director_id, `trailer` = :trailer, `sinopsis` = :sinopsis, `precio` = :precio WHERE `peliculas`.`id` = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([
+            'nombre' => htmlspecialchars($nombre),
+            'categoria_id' => htmlspecialchars($categoria_id),
+            'trailer' => htmlspecialchars($trailer),
+            'sinopsis' => htmlspecialchars($sinopsis),
+            'director_id' => htmlspecialchars($director_id),
+            'precio' => htmlspecialchars($precio),
+            "id" => htmlspecialchars($id)
+        ]);
+    }
+
+    public function reemplazarImagen($portada, $id){
+        $conexion = (new Conexion()) -> getConexion();
+        $query = "UPDATE peliculas SET img=:portada WHERE id = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([
+            "portada" => $portada,
+            "id" => $id
+        ]);
+    }
+
+
+
+
+
 
         //Get - Sirven para obtener el valor del atributo
         //Set - Sirven para cambiar el valor del atributo

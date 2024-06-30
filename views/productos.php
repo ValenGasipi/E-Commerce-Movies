@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <title>Productos</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
+<body> -->
 
 <h2 class="text-center text-primary-emphasis m-4">Todas las Peliculas</h2>
 
@@ -26,7 +26,7 @@ foreach ($productos as $producto) {
     $recortarDescripcion = ( new Pelicula() )->recortarDescripcion(($producto->getSinopsis()));
     ?>
         <div class="card" style="width: 15rem;"> <!-- Creo el div de la tarjeta para cada recorrido-->
-            <div class="contenedor-img"><img src="<?= $producto->getImagen() ?>" class="card-img-top" alt="<?= $producto->getNombre() ?>"></div>
+            <div class="contenedor-img"><img src="img/<?= $producto->getImagen() ?>" class="card-img-top" alt="<?= $producto->getNombre() ?>"></div>
             
             <div class="card-body"> <!-- Creo el div del contenido textual de la tarjeta-->
                 <h5 class="mb-2 text-primary-emphasis fs-6" ><?= $nombreConMayuscula; ?></h5>

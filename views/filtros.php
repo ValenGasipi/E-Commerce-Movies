@@ -32,7 +32,7 @@ if(isset($_GET["categoria"])){
             ?>
         
                 <div class="card" style="width: 15rem;"> <!-- Creo el div de la tarjeta para cada recorrido-->
-                    <div class="contenedor-img"><img src="<?= $producto->getImagen() ?>" class="card-img-top" alt="<?= $producto->getNombre() ?>"></div>
+                    <div class="contenedor-img"><img src="img/<?= $producto->getImagen() ?>" class="card-img-top" alt="<?= $producto->getNombre() ?>"></div>
                     
                     <div class="card-body"> <!-- Creo el div del contenido textual de la tarjeta-->
                         <h5 class="mb-2 text-primary-emphasis fs-6" ><?= $nombreConMayuscula; ?></h5>

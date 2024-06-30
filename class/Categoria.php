@@ -5,6 +5,20 @@ class Categoria{
     protected $nombre;
     protected $descripcion;
 
+    public function catalogoCompleto(): array
+    {
+        $catalogo = [];
+        $conexion = (new Conexion())->getConexion();
+        $query = "SELECT * FROM categoria";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
+
+        $catalogo = $PDOStatement->fetchAll();
+
+        return $catalogo;
+    }
+
     public function catalogoCategoria(int $id) :? self
     {
         $conexion = (new Conexion())->getConexion();
@@ -16,6 +30,44 @@ class Categoria{
     
         return $resultado ? $resultado : null;
     }
+
+    public function edit($nombre, $descripcion, $id){
+        $conexion = (new Conexion())->getConexion();
+        $query = "UPDATE categoria SET nombre= :nombre, descripcion= :descripcion WHERE id = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([
+            "nombre" => htmlspecialchars($nombre),
+            "descripcion" => htmlspecialchars($descripcion),
+            "id" => htmlspecialchars($id)
+        ]);
+    }
+
+    public function delete(){
+        $conexion = (new Conexion())->getConexion();
+        $query = "DELETE FROM categoria WHERE id = :id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(["id" => htmlspecialchars($this->id)]);
+    }
+
+    public function add($nombre, $biografia): void
+    {
+        try {
+            $conexion = (new Conexion())->getConexion();
+            $query = "INSERT INTO categoria VALUES (null, :nombre, :biografia)";
+            $PDOStatement = $conexion->prepare($query);
+            $PDOStatement->execute([
+                "nombre" => htmlspecialchars($nombre),
+                "biografia" => htmlspecialchars($biografia),
+            ]);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+
+
+    // Getters y Setters
      
     public function getId()
     {
